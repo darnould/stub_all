@@ -16,7 +16,9 @@ Ruby war-crimes to deserve that.
 
 Any global constants that come from `require` (which `Kernel.stub_all`
 defined here overrides) raise exceptions on method calls.  This forces explicit
-stubbing (e.g. `allow`/`expect` in RSpec), and prevents accidentally using real
+stubbing (e.g. `allow`/`expect` in RSpec), and prevents accidental use of real
 dependencies outside of the unit being tested - without forcing dependency
 injection.
 
+I've yet to see how much this would actually break, in real practice.  Don't do
+anything silly like actually using this in production!
