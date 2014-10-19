@@ -11,3 +11,12 @@ levels of indirection, i.e. dependency injection.
 
 Maybe I'll package this as a Gem.  But this code is probably executing too many
 Ruby war-crimes to deserve that.
+
+## Explanation
+
+Any global constants that come from `require` (which `Kernel.stub_all`
+defined here overrides) raise exceptions on method calls.  This forces explicit
+stubbing (e.g. `allow`/`expect` in RSpec), and prevents accidentally using real
+dependencies outside of the unit being tested - without forcing dependency
+injection.
+
