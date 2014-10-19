@@ -1,7 +1,7 @@
 module Kernel
-  REAL_REQUIRE = lambda { |r| require r }
-
   @@to_stub = []
+
+  alias_method :original_require, :require
 
   module StubMe
     # Should generally not be rescued, as StandardError would be.
@@ -14,7 +14,7 @@ module Kernel
 
   def require(path)
     previous_constants = constants
-    ret = REAL_REQUIRE.call(path)
+    ret = original_require path
     new_constants = constants - previous_constants
 
     @@to_stub = (@@to_stub + new_constants).uniq
